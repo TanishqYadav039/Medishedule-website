@@ -108,15 +108,15 @@ const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) 
                             </div>
                         </div>
                     </div>
-                    <div className={`sm:hidden absolute top-full left-0 w-full h-50 bg-white/90 flex justify-center p-4 transition-all duration-500 ease-in-out z-50 ${dropDown ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"}`}>
+                    <div className={`sm:hidden absolute top-full left-0 w-full bg-black/80 flex justify-center p-4 transition-all duration-500 ease-in-out z-50 ${dropDown ? "opacity-100 h-50" : "opacity-0 h-0"}`}>
                         <div className="flex flex-col space-x-4 items-center justify-center gap-3">
-                                <NavLink to='/' className="text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer">
+                                <NavLink to='/' className="text-white hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer">
                                     Home
                                 </NavLink>
-                                <NavLink to="patient" className={`text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer ${user === 'patient' && isLogin ? "" : "hidden"}`}>
+                                <NavLink to="patient" className={`text-white hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer ${user === 'patient' && isLogin ? "" : "hidden"}`}>
                                     Patient view
                                 </NavLink>
-                                <NavLink to="doctor" className={`text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer ${user === 'doctor' && isLogin ? "" : "hidden"}`}>
+                                <NavLink to="doctor" className={`text-white hover:text-blue-600 px-3 py-2 text-sm font-medium cursor-pointer ${user === 'doctor' && isLogin ? "" : "hidden"}`}>
                                     Doctor view
                                 </NavLink>
                                 <button
