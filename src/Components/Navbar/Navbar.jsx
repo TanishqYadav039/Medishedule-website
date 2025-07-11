@@ -9,25 +9,29 @@ const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) 
 
 
     useEffect(() => {
-        const userDetail = JSON.parse(localStorage.getItem("user") !== null && localStorage.getItem("user"))
-        userDetail.forEach((detail) => {
-            if (detail.login) {
-                setUser(detail.userType); 
-                setUserName(detail.emailId)
-                setIsLogin(detail.login)
-            }
-        })
+        const userDetail = JSON.parse(localStorage.getItem("user")) // null
+        if (userDetail) {
+            userDetail.forEach((detail) => {
+                if (detail.login) {
+                    setUser(detail.userType);
+                    setUserName(detail.emailId)
+                    setIsLogin(detail.login)
+                }
+            })
+        }
     }, [user])
 
 
     const logOut = () => {
         const user = JSON.parse(localStorage.getItem("user"))
         setIsLogin(!isLogin)
-        user.forEach((detail)=>{
-            if(detail.emailId === username){
-                detail.login = !detail.login
-            }
-        })
+        if (user) {
+            user.forEach((detail) => {
+                if (detail.emailId === username) {
+                    detail.login = !detail.login
+                }
+            })
+        }
         localStorage.setItem("user", JSON.stringify(user))
         location.pathname = "/"
     }

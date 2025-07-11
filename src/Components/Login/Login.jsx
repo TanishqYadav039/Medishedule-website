@@ -53,7 +53,7 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
     if (detail) {
       setDetail(detail)
     }
-  }, [detail])
+  }, [])
 
 
   return (
