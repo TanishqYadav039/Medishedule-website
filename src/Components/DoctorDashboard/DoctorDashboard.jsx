@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaCalendarAlt, FaUserCircle, FaBell, FaSearch, FaChevronRight, FaStethoscope, FaClock, FaUserInjured, FaNotesMedical } from 'react-icons/fa';
 
 export default function DoctorDashboard() {
@@ -6,10 +6,19 @@ export default function DoctorDashboard() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showNotesModal, setShowNotesModal] = useState(false);
   const [medicalNotes, setMedicalNotes] = useState('');
+  const [appointmentData, setAppointmentData] = useState([])
+
+
+  useEffect(()=>{
+    const data = JSON.parse(localStorage.getItem("allAppointmentsList"))
+    if(data){
+      setAppointmentData(data)
+    }
+  },[])
 
   // Mock data
   const appointments = {
-    today: JSON.parse(localStorage.getItem("allAppointmentsList")),
+    today: appointmentData,
     upcoming: [
       { id: 5, patient: 'Robert Wilson', date: '2023-06-16', time: '9:30 AM', type: 'Consultation' },
       { id: 6, patient: 'Lisa Miller', date: '2023-06-16', time: '11:00 AM', type: 'Follow-up' },

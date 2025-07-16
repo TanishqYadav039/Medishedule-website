@@ -6,8 +6,11 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userName, setUserName] = useState('')
   const [isFill, setIsFill] = useState(false)
   const [detail, setDetail] = useState([])
+  const [specialization, setSpecialization] = useState("")
+  const [medicalLicense, setMedicalLicense] = useState("")
 
   const loggedIn = () => {
     if (email.trim() === "" && password.trim() === "") {
@@ -33,16 +36,19 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
     //   })
     // }
     if (email !== "" && password !== "") {
-      const accountList = [...detail,{
+      const accountList = [...detail, {
         userType: accountType,
+        userName: userName,
         emailId: email.trim(),
         userPass: password.trim(),
-        login: false
+        login: false,
+        specialization : accountType === "doctor" ? specialization : "",
+        medicalLicense: accountType === "doctor" ? medicalLicense : "",
       }]
       localStorage.setItem("user", JSON.stringify(accountList))
       const anotherdetail = JSON.parse(localStorage.getItem("user"))
-      console.log(anotherdetail)
-      console.log(accountList);
+      // console.log(anotherdetail)
+      // console.log(accountList);
       setDetail(accountList)
       alert(`Your account created successfully...`)
     }
@@ -61,7 +67,7 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
       {activeTab && (
         <div className="fixed inset-0 bg-blue-500 bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
-            <div className="p-6">
+            <div className="px-6 py-3">
               {/* Tabs */}
               <div className="flex border-b border-gray-200">
                 <button
@@ -139,7 +145,7 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
 
               {/* Register Form */}
               {activeTab === 'register' && (
-                <div className="mt-6 space-y-4">
+                <div className="mt-6 space-y-2">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Account Type</label>
                     <div className="flex">
@@ -158,6 +164,15 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
                         Doctor
                       </button>
                     </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter your Name"
+                      onChange={(e) => setUserName(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Email address</label>
@@ -181,7 +196,7 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
                     <>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
-                        <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value={specialization}  onChange={(e)=> setSpecialization(e.target.value)}>
                           <option value="">Select specialization</option>
                           <option value="cardiology">Cardiology</option>
                           <option value="dermatology">Dermatology</option>
@@ -194,6 +209,8 @@ const Login = ({ activeTab, accountType, setActiveTab, setAccountType, showLogin
                           type="text"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Enter license number"
+                          value={medicalLicense}
+                          onChange={(e)=> setMedicalLicense(e.target.value)}
                         />
                       </div>
                     </>

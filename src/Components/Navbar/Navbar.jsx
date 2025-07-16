@@ -6,6 +6,7 @@ import { NavLink } from 'react-router';
 const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) => {
     const [user, setUser] = useState('')
     const [username, setUserName] = useState("")
+    const [userEmailId, setUserEmailId] = useState("")
     const [isVisible, setIsVisible] = useState(false)
     const [dropDown, setDropDown] = useState(false);
 
@@ -16,7 +17,8 @@ const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) 
             userDetail.forEach((detail) => {
                 if (detail.login) {
                     setUser(detail.userType);
-                    setUserName(detail.emailId)
+                    setUserName(detail.userName)
+                    setUserEmailId(detail.emailId)
                     setIsLogin(detail.login)
                 }
             })
@@ -29,7 +31,7 @@ const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) 
         setIsLogin(!isLogin)
         if (user) {
             user.forEach((detail) => {
-                if (detail.emailId === username) {
+                if (detail.emailId === userEmailId) {
                     detail.login = !detail.login
                 }
             })
@@ -95,7 +97,7 @@ const Navbar = ({ showLogin, setShowLogin, setActiveTab, isLogin, setIsLogin }) 
                                             setIsVisible(!isVisible)
                                         }}>
                                             <FaUserCircle className="text-gray-400 text-2xl mr-2" />
-                                            <span className="text-sm font-medium">{username}</span>
+                                            <span className="text-sm font-medium">{`Dr. ${username}`}</span>
                                         </button>
                                         <button
                                             className={`flex items-center justify-center p-2 cursor-pointer w-25 rounded-b-xl bg-white transition duration-500 linear ${isVisible ? "opacity-100" : "-translate-y-10 opacity-0"}`}
